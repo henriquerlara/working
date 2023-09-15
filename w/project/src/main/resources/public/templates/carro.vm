@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerenciamento de Carros</title>
+</head>
+<body>
+    <h1>Gerenciamento de Carros</h1>
+
+    <!-- Listar carros -->
+    <h2>Lista de Carros</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+            <th>Ações</th>
+        </tr>
+        #foreach($carro in $carros)
+        <tr>
+            <td>$carro.id</td>
+            <td>$carro.marca</td>
+            <td>$carro.modelo</td>
+            <td>$carro.ano</td>
+            <td>
+                <a href="/carros/$carro.id/edit">Editar</a> |
+                <form method="post" action="/carros/$carro.id/delete">
+                    <input type="submit" value="Excluir">
+                </form>
+            </td>
+        </tr>
+        #end
+    </table>
+
+    <!-- Formulário de inserção -->
+    <h2>Adicionar Carro</h2>
+    <form method="post" action="/carros/insert">
+        <label>Marca: <input type="text" name="marca"></label><br>
+        <label>Modelo: <input type="text" name="modelo"></label><br>
+        <label>Ano: <input type="text" name="ano"></label><br>
+        <input type="submit" value="Adicionar">
+    </form>
+
+    <!-- Formulário de edição -->
+    #if($carro)
+    <h2>Editar Carro</h2>
+    <form method="post" action="/carros/$carro.id/edit">
+        <label>Marca: <input type="text" name="marca" value="$carro.marca"></label><br>
+        <label>Modelo: <input type="text" name="modelo" value="$carro.modelo"></label><br>
+        <label>Ano: <input type="text" name="ano" value="$carro.ano"></label><br>
+        <input type="submit" value="Atualizar">
+    </form>
+    #end
+</body>
+</html>
+
